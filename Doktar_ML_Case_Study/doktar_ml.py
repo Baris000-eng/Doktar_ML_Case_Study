@@ -13,12 +13,12 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
 # Load the pixel values from the TIF files
-raw_rgb_image = tiff.imread('raw_RGB_image.tif')
-true_color_rgb_image = tiff.imread('true_color_RGB_image.tif')
+raw_rgb_image = tiff.imread('raw_RGB_image.tif') ##############reading the tif file of raw rgb image 
+true_color_rgb_image = tiff.imread('true_color_RGB_image.tif') #########reading the tif file of true color rgb image.
 
 # Reshape the images to match the pixel pairs
-raw_rgb_image = raw_rgb_image.reshape(-1, 3)
-true_color_rgb_image = true_color_rgb_image.reshape(-1, 3)
+raw_rgb_image = raw_rgb_image.reshape(-1, 3) #########her row rgb channellarını gösterecek şekilde imageları columnar olacak şekilde reshape etme.
+true_color_rgb_image = true_color_rgb_image.reshape(-1, 3) #########her row rgb channellarını gösterecek şekilde imageları columnar olacak şekilde reshape etme.
 
 # Define the mapping function from int16 to int8
 def map_int16_to_int8(int16_values):
@@ -27,7 +27,7 @@ def map_int16_to_int8(int16_values):
 # Map the int16 values in raw_rgb_image to int8
 mapped_raw_rgb_image = map_int16_to_int8(raw_rgb_image) 
 
-# Split the data into training and testing sets
+# Split the data into training and testing sets (test: %25, train: %75, seed is chosen as 43 to obtain consistent results for different runs)
 X_train, X_test, y_train, y_test = train_test_split(mapped_raw_rgb_image, true_color_rgb_image, test_size=0.25, random_state=43)
 
 # Define the number of bootstrap samples
@@ -51,6 +51,7 @@ l    inear_predictions.append(linear_pred)  # Append the predictions to the line
 
     # Neural Network Model
     model = Sequential() ##creating an instance of the neural network model
+    ########input data with 3 features where features correspond to the RGB channels.
     model.add(Dense(32, activation='relu', input_shape=(3,))) #####adding a fully connected dense layer to the neural network model. Rectified Linear Unit is used as the activation function.
     model.add(Dense(32, activation='relu')) #######adding another dense layer with activation function rectified linear unit and number of neurons 32.
     model.add(Dense(3)) ##############adding another dense layer with a number of neurons as 3.
