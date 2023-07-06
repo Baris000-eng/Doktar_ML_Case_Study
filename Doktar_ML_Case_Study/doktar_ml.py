@@ -38,8 +38,8 @@ linear_predictions = [] #########list for storing the linear regression predicti
 nn_predictions = [] ###########list for storing the neural network predictions
 
 for _ in range(n_bootstrap_samples):
-    # Create a bootstrap sample
-    indices = np.random.choice(range(len(X_train)), size=len(X_train), replace=True) 
+    # Create a bootstrap sample, replacement done for sending the selected index back to the set of input indices.
+    indices = np.random.choice(range(len(X_train)), size=len(X_train), replace=True) ####randomly select bootstrap indices with a length of x train from the range of 0 to length of x train data.
     X_bootstrap = X_train[indices] ###########get the x train data corresponding to the bootstrap sample
     y_bootstrap = y_train[indices]  ###########get the y train data corresponding to the bootstrap sample
 
