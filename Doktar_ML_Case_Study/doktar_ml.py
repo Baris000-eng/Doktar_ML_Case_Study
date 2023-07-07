@@ -3,7 +3,7 @@
 
 # In[1]:
 
-
+#####Importing necessary libraries for numpy arrays, tiff image reading, and model training.
 import numpy as np
 import tifffile as tiff
 from sklearn.model_selection import train_test_split
